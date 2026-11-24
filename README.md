@@ -194,7 +194,7 @@ python eval/run_eval.py --base-url http://localhost:9090/api/sagerag --questions
 
 ```text
 6 条问题：命中 6/6
-平均首字延迟：约 6.1s
-平均总耗时：约 8.5s
+平均首字延迟：约 5.0s
+平均总耗时：约 7.1s
 ```
 
