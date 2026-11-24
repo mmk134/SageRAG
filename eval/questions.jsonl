@@ -1,6 +1,6 @@
 {"id": "hr-leave", "question": "请假流程是怎样的？", "keywords": ["OA", "主管", "审批"]}
 {"id": "hr-vpn", "question": "公司 VPN 连不上怎么办？", "keywords": ["账号", "锁定", "网络"]}
-{"id": "hr-invoice", "question": "发票抬头包含哪些信息？", "keywords": ["纳税人识别号", "开户行"]}
+{"id": "hr-invoice", "question": "发票抬头包含哪些信息？", "keywords": ["纳税人识别号", "开户银行"]}
 {"id": "oa-menu", "question": "请假审批在 OA 的哪个菜单？", "keywords": ["流程中心", "请假申请"]}
 {"id": "oa-feature", "question": "OA 系统主要提供哪些功能？", "keywords": ["流程审批", "公告", "文档中心"]}
 {"id": "hr-reimburse", "question": "差旅报销需要哪些资料？", "keywords": ["出差申请单", "发票", "行程单"]}

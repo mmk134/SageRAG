@@ -8,8 +8,8 @@ ON CONFLICT (id) DO NOTHING;
 -- 意图树默认引用的两个知识库（与 IntentTreeFactory 中的 KB_ID 保持一致）
 INSERT INTO t_knowledge_base (id, name, embedding_model, collection_name, created_by, updated_by, create_time, update_time, deleted)
 VALUES
-  (1997855927072321537, '员工手册与制度', 'bailian-emb-v4', 'kb_employee_handbook', 'admin', 'admin', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0),
-  (1997857139737882625, '业务系统手册', 'bailian-emb-v4', 'kb_business_system', 'admin', 'admin', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0)
+  (1997855927072321537, '员工手册与制度', 'qwen3.7-text-embedding-flash', 'kb_employee_handbook', 'admin', 'admin', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0),
+  (1997857139737882625, '业务系统手册', 'qwen3.7-text-embedding-flash', 'kb_business_system', 'admin', 'admin', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0)
 ON CONFLICT (id) DO NOTHING;
 
 -- 聊天页示例问题
