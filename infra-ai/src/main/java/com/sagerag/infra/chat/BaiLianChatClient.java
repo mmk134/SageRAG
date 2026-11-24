@@ -17,6 +17,7 @@
 
 package com.sagerag.infra.chat;
 
+import com.google.gson.JsonObject;
 import com.sagerag.framework.convention.ChatRequest;
 import com.sagerag.framework.trace.RagTraceNode;
 import com.sagerag.infra.enums.ModelProvider;
@@ -31,6 +32,15 @@ public class BaiLianChatClient extends AbstractOpenAIStyleChatClient {
     @Override
     public String provider() {
         return ModelProvider.BAI_LIAN.getId();
+    }
+
+    /**
+     * 百炼的 Qwen3 系列默认可能开启思考模式，显式传 false 才能关闭，
+     * 否则普通问答也要等 reasoning 结束，首字延迟会到几十秒。
+     */
+    @Override
+    protected void customizeRequestBody(JsonObject body, ChatRequest request) {
+        body.addProperty("enable_thinking", Boolean.TRUE.equals(request.getThinking()));
     }
 
     @Override

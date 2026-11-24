@@ -53,7 +53,7 @@ rag:
 
   default:
     collection-name: rag_default_store
-    dimension: ${EMBEDDING_DIMENSION:1536}
+    dimension: ${EMBEDDING_DIMENSION:1024}
     metric-type: COSINE
     sse-timeout-ms: 300000
 
@@ -140,34 +140,30 @@ ai:
     message-chunk-size: 1
 
   chat:
-    default-model: qwen-plus
-    deep-thinking-model: qwen3-max
+    default-model: qwen3.8-max-0902
+    deep-thinking-model: qwen3.8-max-0902
     candidates:
+      - id: qwen3.8-max-0902
+        provider: bailian
+        model: qwen3.8-max-0902
+        supports-thinking: true
+        priority: 1
       - id: qwen-plus
         provider: bailian
         model: qwen-plus-latest
-        priority: 1
-      - id: qwen3-local
-        provider: ollama
-        model: ${OLLAMA_CHAT_MODEL:deepseek-r1:8b}
         priority: 2
-      - id: qwen3-max
-        provider: bailian
-        model: qwen3-max
-        supports-thinking: true
-        priority: 3
       - id: glm-4.7
         provider: siliconflow
         model: Pro/zai-org/GLM-4.7
         supports-thinking: true
-        priority: 4
+        priority: 3
 
   embedding:
-    default-model: bailian-emb-v4
+    default-model: qwen3.7-text-embedding-flash
     candidates:
-      - id: bailian-emb-v4
+      - id: qwen3.7-text-embedding-flash
         provider: bailian
-        model: text-embedding-v4
+        model: qwen3.7-text-embedding-flash
         dimension: ${rag.default.dimension}
         priority: 1
       - id: qwen-emb-8b
@@ -175,18 +171,13 @@ ai:
         model: Qwen/Qwen3-Embedding-8B
         dimension: ${rag.default.dimension}
         priority: 2
-      - id: qwen-emb-local
-        provider: ollama
-        model: ${OLLAMA_EMBEDDING_MODEL:nomic-embed-text}
-        dimension: ${rag.default.dimension}
-        priority: 3
 
   rerank:
-    default-model: qwen3-rerank
+    default-model: qwen3.7-text-rerank
     candidates:
-      - id: qwen3-rerank
+      - id: qwen3.7-text-rerank
         provider: bailian
-        model: qwen3-rerank
+        model: qwen3.7-text-rerank
         priority: 1
       - id: rerank-noop
         provider: noop

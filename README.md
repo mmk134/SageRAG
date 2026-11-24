@@ -161,6 +161,16 @@ SageRAG
 
 ## 配置说明
 
+默认模型（可在 `application.yaml` 的 `ai.*.candidates` 中调整）：
+
+| 能力 | 模型 | 说明 |
+|---|---|---|
+| Chat | `qwen3.8-max-0902` | 普通问答关闭思考模式，首字延迟约 5–7s；开启深度思考后走 reasoning |
+| Embedding | `qwen3.7-text-embedding-flash` | 输出 1024 维，对应 `t_knowledge_vector.embedding vector(1024)` |
+| Rerank | `qwen3.7-text-rerank` | 百炼原生 rerank 接口 |
+
+> 换 embedding 模型时必须同时改 `EMBEDDING_DIMENSION` 和向量表维度，否则写入会失败。
+
 | 配置 | 说明 |
 |---|---|
 | `POSTGRES_*` / `REDIS_*` | 数据库与缓存连接 |
@@ -180,28 +190,3 @@ python eval/run_eval.py --base-url http://localhost:9090/api/sagerag --questions
 
 脚本会逐条调用问答接口，统计关键词命中、平均首字延迟和总耗时，输出 Markdown 报告。详见 `eval/README.md`。
 
-## 与参考项目的关系
-
-SageRAG 的工程骨架参考了开源项目 [Ragent AI](https://github.com/nageoffer/ragent)（Apache-2.0）。在此基础上完成了品牌与包结构重构、入库链路简化（移除 Pipeline 模式）、向量库收敛到 pgvector、文件存储本地化、意图树自动初始化、演示数据与评测脚本等改动。原始版权与许可证见 `LICENSE`，具体差异见下方。
-
-### 相对参考实现的主要改动
-
-- 包名 `com.nageoffer.ai.ragent` → `com.sagerag`，接口前缀 `/api/sagerag`；
-- 删除 `ingestion` 下的 Pipeline 引擎、节点、后台页面与 4 张流水线表，入库统一为参数化分块；
-- 删除 Milvus 实现与依赖，仅保留 PostgreSQL + pgvector；
-- 新增 `LocalFileStorageService`，S3 改为可选；
-- 新增意图树空库自动初始化、默认知识库与示例问题种子数据；
-- 新增 `resources/demo-docs`、`docker-compose.yml`、`.env.example`、离线评测脚本；
-- 前端删除「数据通道」模块，文档上传/详情/日志只保留分块配置；
-- 修复会话接口的 Axios 泛型类型问题，`tsc` 全量通过。
-
-## Roadmap
-
-- [ ] 检索调试台：输入问题直接看各通道召回与分数
-- [ ] 文档解析结果预览与分块可视化对比
-- [ ] 评测结果接入后台图表
-- [ ] 多租户与知识库级权限
-
-## License
-
-[Apache License 2.0](./LICENSE)。本项目包含源自 Ragent AI 的代码，保留原版权声明；二次开发部分同样以 Apache-2.0 发布。
