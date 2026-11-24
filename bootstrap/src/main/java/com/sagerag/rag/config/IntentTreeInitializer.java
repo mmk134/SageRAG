@@ -25,10 +25,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 /**
- * 首次启动时初始化意图树。
+ * 启动时补齐缺失的意图节点。
  * <p>
  * 意图树是检索路由的入口：没有叶子节点时意图分类器拿不到候选，问答会退化成全局向量检索。
- * 这里只负责“空库初始化”，已有数据不会覆盖，管理员仍可在后台增删改。
+ * initFromFactory 按 intentCode 去重，只补缺失节点，不覆盖后台已调整的配置。
  */
 @Slf4j
 @Component
@@ -40,11 +40,10 @@ public class IntentTreeInitializer implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         try {
-            if (intentTreeService.count() > 0) {
-                return;
-            }
             int created = intentTreeService.initFromFactory();
-            log.info("意图树为空，已初始化 {} 个节点", created);
+            if (created > 0) {
+                log.info("已补齐 {} 个缺失的意图节点", created);
+            }
         } catch (Exception e) {
             log.warn("意图树初始化失败，请确认知识库种子数据已执行: {}", e.getMessage());
         }

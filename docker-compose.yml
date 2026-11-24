@@ -15,6 +15,7 @@ services:
       - sagerag-pgdata:/var/lib/postgresql/data
       - ./resources/database/schema_pg.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
       - ./resources/database/init_data_pg.sql:/docker-entrypoint-initdb.d/02-init-data.sql:ro
+      - ./resources/database/extra_intents.sql:/docker-entrypoint-initdb.d/03-extra-intents.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-sagerag}"]
       interval: 5s
