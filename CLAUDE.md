@@ -71,4 +71,4 @@ frontend    React 聊天页 + 后台
 
 ## 数据
 
-建表 `resources/database/schema_pg.sql`，初始化 `init_data_pg.sql`，演示文档 `resources/demo-docs/`。Docker 首次启动会自动执行前两个 SQL。
+建表 `resources/database/schema_pg.sql`，初始化 `init_data_pg.sql`，MCP/系统意图 `extra_intents.sql`，演示文档 `resources/demo-docs/`（批量入库脚本 `scripts/import-knowledge.ps1`）。Docker 首次启动会自动执行前三个 SQL。

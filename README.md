@@ -113,8 +113,13 @@ java -jar bootstrap/target/bootstrap-0.0.1-SNAPSHOT.jar
 
 ### 6. 导入演示文档
 
-进入后台 → 知识库管理 → 选择「员工手册与制度」或「业务系统手册」→ 上传
-`resources/demo-docs/` 下的 Markdown → 点击「分块」。
+```powershell
+.\scripts\import-knowledge.ps1
+```
+
+脚本会把 `resources/demo-docs/knowledge/` 下的 9 份文档按目录分别导入「员工手册与制度」和「业务系统手册」，上传后自动触发分块；已存在的同名文档会跳过，可重复执行。
+
+也可以在后台手动上传 `resources/demo-docs/` 下的 Markdown。
 
 回到聊天页，用示例问题提问即可看到检索、引用和流式回答。
 

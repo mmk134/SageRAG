@@ -46,7 +46,8 @@ mvn -o install -DskipTests
 
 ## 6. 导入演示文档
 
-登录后台 → 知识库管理 → 进入「员工手册与制度」或「业务系统手册」→ 上传
-`resources/demo-docs/` 下的 Markdown → 点击「分块」。
+```powershell
+.\scripts\import-knowledge.ps1
+```
 
-然后回到聊天页，用示例问题试问。
+会把 `resources/demo-docs/knowledge/` 下的文档按 `group` / `biz` 目录导入对应知识库，并自动触发分块；同名文档自动跳过。
