@@ -190,3 +190,11 @@ python eval/run_eval.py --base-url http://localhost:9090/api/sagerag --questions
 
 脚本会逐条调用问答接口，统计关键词命中、平均首字延迟和总耗时，输出 Markdown 报告。详见 `eval/README.md`。
 
+本机示例数据实测（qwen3.8-max-0902 + qwen3.7-text-embedding-flash + qwen3.7-text-rerank）：
+
+```text
+6 条问题：命中 6/6
+平均首字延迟：约 6.1s
+平均总耗时：约 8.5s
+```
+

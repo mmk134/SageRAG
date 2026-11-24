@@ -82,7 +82,7 @@ def stream_chat(base_url: str, token: str, question: str, timeout: int) -> tuple
 
 def load_questions(path: Path) -> list[dict]:
     items = []
-    for line in path.read_text(encoding="utf-8").splitlines():
+    for line in path.read_text(encoding="utf-8-sig").splitlines():
         line = line.strip()
         if line:
             items.append(json.loads(line))

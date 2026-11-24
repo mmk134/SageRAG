@@ -83,6 +83,7 @@ DOMAIN → CATEGORY → TOPIC。只有叶子参与分类，父节点用于组织
 - 意图为空时全局检索兜底，导致答非所问；加了置信度阈值和「空召回」短路。
 - 分块参数和策略不匹配（比如 structure_aware 传了 chunkSize）会静默用默认值；现在上传前按策略的 defaultConfig 校验必填字段。
 - 接入 Qwen3.8 后首字延迟一度到 60s：模型默认带 reasoning，普通问答也在等思考结束。在 `BaiLianChatClient` 里显式传 `enable_thinking=false`，只在用户打开深度思考时传 true，首字降到 5–7s。
+- 发票意图配了一段强定制 Prompt，结果「差旅报销需要哪些资料」也被路由到该叶子，按发票模板硬套。去掉定制 Prompt，改用通用 KB 提示词 + 检索上下文，问题就正常了——**意图的 Prompt 不能比意图本身更强**。
 
 ## 14. 如果 QPS 涨 10 倍
 
